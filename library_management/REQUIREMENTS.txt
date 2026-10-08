@@ -1,0 +1,50 @@
+Entities:
+
+Book
+- id: UUID
+- author: str
+- title: str
+- isbn: str
+
+Availability(StrEnum)
+- AVILABLE
+- LOANED
+
+BookCopy
+- id: UUID
+- book_id: UUID
+- in_stock: bool
+
+BookSearchResponse
+- book: Book
+- qty: int
+
+BookLoan
+- book: BookCopy
+- loaned_at: int
+- due_at: int
+
+LibraryManager
+- library_inverntory_service: LibraryInvertoryService
+- loan(isbn: str) -> BookLoan
+- search(author | name | title | isbn) -> list[BookSearchResponse]
+- return_book(member_id, book_copy_id)
+
+User
+id: UUID
+is_member: bool
+active_loans: int
+
+LibraryInventoryService
+- get_quantity() -> int
+- loan() -> BookLoan
+
+PricingStrategy
+- get_price() -> float (Calculates amount due at return)
+
+LateFeeStrategy(PricingStrategy)
+- get_price()
+
+
+
+

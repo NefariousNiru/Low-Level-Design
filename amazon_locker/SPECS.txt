@@ -1,0 +1,52 @@
+Requirements:
+- Must store S/M/L Packages across Lockers
+- Supports deposit/retrieve package
+- Deposit generates a code with an expiry
+- Expired packages cannot be retrieved and stay in locker unless staff clears
+- Clearance happens during deposit
+
+Classes:
+Locker
+- getPackage(access_code)
+- depositPackage(package)
+
+Compartment:
+id: UUID
+type: CompartmentType
+empty: bool
+
+getType()
+getId()
+isEmpty()
+retrieve()
+deposit()
+
+CompartmentType
+SMALL
+MEDIUM
+LARGE
+
+AllocationService
+allocationStrategy: AllocationStrategy
+
+AllocationStrategy interface:
+allocate()
+
+AllocationStrategyGreedy implements AllocationStrategy:
+allocated to available smallest size.
+allocate()
+
+AccessToken
+code:
+expiry:
+
+CodeDelivery interface
+send()
+
+EmailCodeDelivery implements CodeDelivery
+send()
+
+
+
+
+
